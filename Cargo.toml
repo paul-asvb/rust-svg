@@ -7,4 +7,9 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dependencies]
+log = "0.4.14"
 sauron = "0.43"
+console_error_panic_hook = "0.1"
+js-sys = "0.3"
+console_log = "0.2"
+
