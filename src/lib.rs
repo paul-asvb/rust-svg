@@ -10,7 +10,6 @@ use sauron::{html::attributes::style, prelude::*, wasm_bindgen::JsCast};
 
 #[macro_use]
 extern crate log;
-
 pub enum Msg {
     Tick,
 }
@@ -59,12 +58,12 @@ impl Application<Msg> for MySvg {
             |_rotate: u8, _stroke_color: &'static str, _stroke_width_value: u8, _height: u8| {
                 let mut p: String = "".to_string();
                 let mut theta: f32 = 0.0;
+                //let group = g([], []);
 
-                let _edges = 6;
                 let circumradius: f32 = 200.0;
                 let mid: (f32, f32) = (250.0, 250.0);
 
-                for i in 1..3 {
+                for i in 1..7 {
                     theta = theta + PI as f32 / i as f32;
                     let coo = (
                         mid.0 + circumradius * theta.cos(),
@@ -72,11 +71,12 @@ impl Application<Msg> for MySvg {
                     );
                     let s = format!("{},{}", coo.0, coo.1);
                     p = [p, s].join(" ");
+                    //group.children_mut().unwrap().as_mut().push(text("[x(coo.0), y(coo.1)], []"))
                 }
 
                 // <polygon points="100,100 150,25 150,75 200,0" fill="none" stroke="black" />
-
-                polygon([points(p), fill("red"), stroke("black")], [])
+                let p = polygon([points(p), fill("red"), stroke("black")], []);
+                g([], [p])
             };
 
         let _radius = &self.radius;
